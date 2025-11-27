@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SattyoAlert Reporter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">✓</div>
+        <div>
+          <h1>SattyoAlert</h1>
+          <p>সত্য Alert</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Environment Indicator (Optional - Remove for production) -->
+    <!-- <div id="envIndicator" style="background: #f0f0f0; padding: 8px; margin-bottom: 12px; border-radius: 6px; text-align: center; font-size: 11px; color: #666;">
+      <span id="envText"></span>
+    </div> -->
+
+    <!-- Form -->
+    <form id="reportForm">
+      <div class="form-group">
+        <label for="claim">সন্দেহজনক দাবি *</label>
+        <textarea 
+          id="claim" 
+          name="claim" 
+          rows="4" 
+          placeholder="আপনি যে তথ্যটি সন্দেহজনক মনে করছেন..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="category">বিভাগ *</label>
+        <select id="category" name="category" required>
+          <option value="">নির্বাচন করুন</option>
+          <option value="নির্বাচন">🗳️ নির্বাচন</option>
+          <option value="ধর্মীয়">🕌 ধর্মীয়</option>
+          <option value="স্ক্যাম">💰 স্ক্যাম</option>
+          <option value="স্বাস্থ্য">🏥 স্বাস্থ্য</option>
+          <option value="অন্যান্য">📋 অন্যান্য</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="urgency">গুরুত্ব স্তর *</label>
+        <select id="urgency" name="urgency" required>
+          <option value="">নির্বাচন করুন</option>
+          <option value="উচ্চ">🔴 উচ্চ - জরুরি</option>
+          <option value="মাঝারি">🟡 মাঝারি</option>
+          <option value="নিম্ন">🟢 নিম্ন</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sourceUrl">সূত্র (ঐচ্ছিক)</label>
+        <input 
+          type="text" 
+          id="sourceUrl" 
+          name="sourceUrl" 
+          placeholder="বর্তমান পেজের URL"
+          readonly
+        >
+      </div>
+
+      <button type="submit" id="submitBtn" class="submit-btn">
+        📤 রিপোর্ট জমা দিন
+      </button>
+    </form>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message" style="display: none;">
+      <div class="success-icon">✅</div>
+      <h3>সফল!</h3>
+      <p>আপনার রিপোর্ট জমা হয়েছে</p>
+      <button onclick="resetForm()" class="reset-btn">নতুন রিপোর্ট</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>রিপোর্ট গোপনীয় থাকবে</p>
+      <a href="#" id="openSiteLink" target="_blank" rel="noopener noreferrer">SattyoAlert খুলুন →</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+  <script>
+    // Set dynamic link based on environment (defined in popup.js)
+    document.addEventListener('DOMContentLoaded', () => {
+      const link = document.getElementById('openSiteLink');
+      if (typeof API_BASE_URL !== 'undefined') {
+        link.href = API_BASE_URL;
+      } else {
+        // Fallback to production
+        link.href = 'https://sattyo-alert-hackathon.vercel.app';
+      }
+
+      // Optional: Show environment indicator
+      // const envIndicator = document.getElementById('envIndicator');
+      // const envText = document.getElementById('envText');
+      // if (envIndicator && envText && typeof USE_LOCAL !== 'undefined') {
+      //   envText.textContent = USE_LOCAL ? '🟢 Local Mode' : '🔴 Production Mode';
+      // }
+    });
+  </script>
+</body>
+</html>
