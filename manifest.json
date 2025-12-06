@@ -1,16 +1,18 @@
 {
   "manifest_version": 3,
   "name": "SattyoAlert Reporter",
-  "version": "1.0.0",
-  "description": "Report suspicious content directly to SattyoAlert fact-checking platform",
+  "version": "1.1.0",
+  "description": "Report suspicious content from web and WhatsApp directly to SattyoAlert fact-checking platform",
   "permissions": [
     "contextMenus",
     "storage",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "host_permissions": [
     "http://localhost:3000/*",
-    "https://sattyo-alert-hackathon.vercel.app/*"
+    "https://sattyo-alert-hackathon.vercel.app/*",
+    "https://web.whatsapp.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -26,7 +28,21 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["whatsapp-content.js"],
+      "css": ["whatsapp-styles.css"],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*.png", "whatsapp-styles.css"],
+      "matches": ["https://web.whatsapp.com/*"]
     }
   ],
   "icons": {
