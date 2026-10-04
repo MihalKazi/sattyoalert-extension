@@ -161,3 +161,4 @@ This project is licensed under the **MIT License**.
 
 Modern browser tools for a safer, misinformation-free internet.
 
+
