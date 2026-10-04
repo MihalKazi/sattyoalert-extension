@@ -160,3 +160,4 @@ This project is licensed under the **MIT License**.
 ### ❤️ Made for the SattyoAlert Hackathon
 
 Modern browser tools for a safer, misinformation-free internet.
+
